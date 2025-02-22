@@ -269,10 +269,19 @@ class Godcmd(Plugin):
                         model = conf().get("model") or const.GPT35
                         ok, result = True, "当前模型为: " + str(model)
                     elif len(args) == 1:
-                        if args[0] not in const.MODEL_LIST:
-                            ok, result = False, "模型名称不存在"
+                        # if args[0] not in const.MODEL_LIST:
+                        #     ok, result = False, "模型名称不存在"
+                        # else:
+                        if args[0] == 'list':
+                            ok, result = True, '模型列表为:\n' + json.dumps(const.MODEL_LIST)
+                        elif args[0].isnumeric():
+                            m = const.MODEL_LIST[int(args[0])+1]
+                            conf()["model"] = m
+                            Bridge().reset_bot()
+                            model = conf().get("model") or const.GPT35
+                            ok, result = True, "模型设置为: " + str(model)
                         else:
-                            conf()["model"] = self.model_mapping(args[0])
+                            conf()["model"] = args[0]
                             Bridge().reset_bot()
                             model = conf().get("model") or const.GPT35
                             ok, result = True, "模型设置为: " + str(model)
@@ -295,10 +304,25 @@ class Godcmd(Plugin):
                 elif cmd == "set_gpt_model":
                     if len(args) == 1:
                         user_data = conf().get_user_data(user)
-                        user_data["gpt_model"] = args[0]
-                        ok, result = True, "你的GPT模型已设置为" + args[0]
+                        if args[0].isnumeric():
+                            m = const.MODEL_LIST[int(args[0])+1]
+                            user_data["gpt_model"] = m
+                            ok, result = True, "你的GPT模型已设置为: " + str(m)
+                        else:
+                            user_data["gpt_model"] = args[0]
+                            ok, result = True, "你的GPT模型已设置为: " + args[0]
                     else:
                         ok, result = False, "请提供一个GPT模型"
+                elif cmd == "set_model_list":
+                    if len(args) == 1:
+                        model_list = json.loads(args[0])
+                        if model_list:
+                            const.MODEL_LIST = model_list
+                            ok, result = True, "GPT模型列表已更新:" + json.dumps(const.MODEL_LIST)
+                        else:
+                            ok, result = False, "请提供一个正确的GPT模型列表,JSON数组格式"
+                    else:
+                        ok, result = False, "请提供一个GPT模型列表,JSON数组格式"
                 elif cmd == "gpt_model":
                     user_data = conf().get_user_data(user)
                     model = conf().get("model")

@@ -5,6 +5,7 @@ import logging
 import os
 import pickle
 import copy
+from common import const
 
 from common.log import logger
 
@@ -334,6 +335,10 @@ def load_config():
     logger.info("[INIT] load config: {}".format(drag_sensitive(config)))
 
     config.load_user_datas()
+    model_list = config.get('model_list', [])
+    if model_list:
+        const.MODEL_LIST = model_list
+
 
 def save_config():
     global config

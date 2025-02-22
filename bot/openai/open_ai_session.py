@@ -66,8 +66,9 @@ class OpenAISession(Session):
 # refer to https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb
 def num_tokens_from_string(string: str, model: str) -> int:
     """Returns the number of tokens in a text string."""
-    import tiktoken
+    # import tiktoken
 
-    encoding = tiktoken.encoding_for_model(model)
-    num_tokens = len(encoding.encode(string, disallowed_special=()))
+    # encoding = tiktoken.encoding_for_model(model)
+    # num_tokens = len(encoding.encode(string, disallowed_special=()))
+    num_tokens = len(str)
     return num_tokens
