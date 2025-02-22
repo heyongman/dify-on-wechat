@@ -70,5 +70,5 @@ def num_tokens_from_string(string: str, model: str) -> int:
 
     # encoding = tiktoken.encoding_for_model(model)
     # num_tokens = len(encoding.encode(string, disallowed_special=()))
-    num_tokens = len(str)
+    num_tokens = len(string)
     return num_tokens

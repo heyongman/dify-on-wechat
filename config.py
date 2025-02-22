@@ -209,6 +209,7 @@ available_setting = {
     "Minimax_group_id": "",
     "Minimax_base_url": "",
     "web_port": 9899,
+    "model_list": [],
 }
 
 

@@ -57,7 +57,7 @@ class ChatGPTBot(Bot, OpenAIImage, OpenAIVision):
     def reply(self, query, context=None):
         # acquire reply content
         if context.type == ContextType.TEXT:
-            logger.info("[CHATGPT] query={}".format(query))
+            logger.info("[CHATGPT] model={} query={}".format(context.get("gpt_model"), query))
 
             session_id = context["session_id"]
             reply = None
@@ -179,6 +179,9 @@ class ChatGPTBot(Bot, OpenAIImage, OpenAIVision):
                     if item["type"] == "text":
                         content = item["text"]["content"]
                         break
+            if 'DeepSeek-R1' in args["model"]:
+                # 去除deepseek深度的思考过程
+                content = content[content.index('\n', content.index('> Thinking') + 3):].lstrip()
             return {
                 "total_tokens": response["usage"]["total_tokens"],
                 "completion_tokens": response["usage"]["completion_tokens"],

@@ -273,7 +273,7 @@ class Godcmd(Plugin):
                         #     ok, result = False, "模型名称不存在"
                         # else:
                         if args[0] == 'list':
-                            ok, result = True, '模型列表为:\n' + json.dumps(const.MODEL_LIST)
+                            ok, result = True, '模型列表为:\n' + ','.join(const.MODEL_LIST)
                         elif args[0].isnumeric():
                             m = const.MODEL_LIST[int(args[0])+1]
                             conf()["model"] = m
@@ -305,7 +305,7 @@ class Godcmd(Plugin):
                     if len(args) == 1:
                         user_data = conf().get_user_data(user)
                         if args[0].isnumeric():
-                            m = const.MODEL_LIST[int(args[0])+1]
+                            m = const.MODEL_LIST[int(args[0])-1]
                             user_data["gpt_model"] = m
                             ok, result = True, "你的GPT模型已设置为: " + str(m)
                         else:
@@ -315,14 +315,14 @@ class Godcmd(Plugin):
                         ok, result = False, "请提供一个GPT模型"
                 elif cmd == "set_model_list":
                     if len(args) == 1:
-                        model_list = json.loads(args[0])
+                        model_list = args[0].replace(' ', '').split(',')
                         if model_list:
                             const.MODEL_LIST = model_list
-                            ok, result = True, "GPT模型列表已更新:" + json.dumps(const.MODEL_LIST)
+                            ok, result = True, "GPT模型列表已更新:" + ','.join(const.MODEL_LIST)
                         else:
-                            ok, result = False, "请提供一个正确的GPT模型列表,JSON数组格式"
+                            ok, result = False, "请提供一个正确的GPT模型列表,逗号分隔"
                     else:
-                        ok, result = False, "请提供一个GPT模型列表,JSON数组格式"
+                        ok, result = False, "请提供一个GPT模型列表,逗号分隔"
                 elif cmd == "gpt_model":
                     user_data = conf().get_user_data(user)
                     model = conf().get("model")
