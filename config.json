@@ -1,6 +1,6 @@
 {
     "channel_type": "gewechat",
-    "character_desc": "你是基于大语言模型的AI智能助手，旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。回答应简洁，避免冗余，确保格式便于阅读。",
+    "character_desc": "你是基于大语言模型的AI智能助手，旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。",
     "clear_memory_commands": [
         "#clear",
         "#reset",
@@ -25,9 +25,9 @@
         "ALL_GROUP"
     ],
     "image_recognition": true,
-    "model": "gpt-4o-2024-11-20",
-    "model_list": ["gemini-2.0-flash-thinking-exp-01-21","claude-3-5-sonnet-20241022-all","gemini-2.0-pro-exp-02-05","DeepSeek-R1-all","gpt-4o-2024-11-20","gpt-4o-mini-2024-07-18"],
-    "open_ai_api_base": "https://api2.aigcbest.top/v1",
+    "model": "o3-mini-high",
+    "model_list": ["o3-mini-high", "gemini-2.0-flash-thinking-exp-01-21","claude-3-7-sonnet-20250219","gemini-2.0-pro-exp-02-05","DeepSeek-R1","gpt-4o-2024-11-20","gpt-4o-mini-2024-07-18"],
+    "open_ai_api_base": "https://api.ifopen.ai/v1",
     "open_ai_api_key": "sk-Iapy2VKPeXEewsmKSOzdOLKw6fzcS1VsVxtQzS7XHnvT3tTK",
     "single_chat_prefix": [
         ""

@@ -179,9 +179,6 @@ class ChatGPTBot(Bot, OpenAIImage, OpenAIVision):
                     if item["type"] == "text":
                         content = item["text"]["content"]
                         break
-            if 'DeepSeek-R1' in args["model"]:
-                # 去除deepseek深度的思考过程
-                content = content[content.index('\n', content.index('> Thinking') + 3):].lstrip()
             return {
                 "total_tokens": response["usage"]["total_tokens"],
                 "completion_tokens": response["usage"]["completion_tokens"],
